@@ -1,0 +1,70 @@
+{
+  "name": "@websketch/ir",
+  "version": "0.1.0",
+  "description": "Grammar-based representation of web UI for LLM consumption",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./grammar": {
+      "types": "./dist/grammar.d.ts",
+      "import": "./dist/grammar.js"
+    }
+  },
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs",
+    "test:run": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run",
+    "coverage": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run --coverage",
+    "validate": "npm run clean && npm run typecheck && npm run lint && npm run build && npm run test:run",
+    "prepublishOnly": "npm run clean && npm run build && npm run test:run"
+  },
+  "keywords": [
+    "websketch",
+    "ui-testing",
+    "web-automation",
+    "llm",
+    "ai-agents",
+    "browser-automation",
+    "ui-representation",
+    "ascii-art",
+    "diff",
+    "fingerprint"
+  ],
+  "author": "MCP Tool Shop",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mcp-tool-shop/websketch-ir.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mcp-tool-shop/websketch-ir/issues"
+  },
+  "homepage": "https://github.com/mcp-tool-shop/websketch-ir#readme",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vitest/coverage-v8": "^1.1.0",
+    "eslint": "^8.56.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
