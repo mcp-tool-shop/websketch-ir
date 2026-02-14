@@ -94,6 +94,10 @@ We aim for high test coverage. When adding features:
 3. Add fixture captures if testing specific UI patterns
 4. Test edge cases (empty captures, malformed data)
 
+### Test Quality
+
+Placeholder tests are not allowed on `main`. If a feature needs tests but you can't write them yet, use `it.skip('description', ...)` with a link to a tracking issue. The CI will reject patterns like `expect(true).toBe(true)` or `expect(1 + 1).toBe(2)`.
+
 ### Creating Test Fixtures
 
 Place test captures in `tests/fixtures/`:
