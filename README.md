@@ -1,51 +1,35 @@
-<p align="center">
-  <img src=".github/websketch-logo.png" alt="WebSketch" width="400">
-</p>
+<p align="center"><img src="logo.png" alt="websketch-ir logo" width="200"></p>
 
-# WebSketch IR
+# websketch-ir
 
-[![CI](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml/badge.svg)](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml)
+> Part of [MCP Tool Shop](https://mcptoolshop.com)
+
+**A grammar-based intermediate representation for capturing web page UI structure as semantic primitives.**
+
 [![npm version](https://img.shields.io/npm/v/@mcptoolshop/websketch-ir.svg)](https://www.npmjs.com/package/@mcptoolshop/websketch-ir)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![node 18+](https://img.shields.io/badge/node-18%2B-brightgreen.svg)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org)
 
-**WebSketch IR** is a grammar-based intermediate representation for capturing web page UI structure as semantic primitives. It provides a compact, LLM-friendly format for describing UI layouts, interactive elements, and visual hierarchy.
+---
 
-## Overview
+## At a Glance
 
-WebSketch IR transforms complex DOM structures into a minimal grammar that captures:
-
-- **Layout primitives** - Containers, grids, flex layouts
-- **Interactive elements** - Buttons, inputs, links, forms
-- **Visual hierarchy** - Headers, sections, navigation
-- **Semantic meaning** - Purpose and relationships between elements
+- **Grammar-based** -- Compiles DOM soup into a small, fixed vocabulary of UI primitives (`BUTTON`, `NAV`, `CARD`, `INPUT`, ...)
+- **LLM-friendly** -- ASCII wireframe rendering lets language models reason about layouts without vision
+- **Typed** -- Full TypeScript types for every node, capture, and option; zero runtime dependencies
+- **Diffable** -- Structural diff engine matches nodes by geometry + role + semantics, not DOM identity
+- **Fingerprintable** -- Content-addressed hashing produces stable fingerprints for fast equality checks
 
 ## Ecosystem
 
-WebSketch IR is the core library for the WebSketch family of tools:
-
-| Package | Description |
-|---------|-------------|
+| Package | Role |
+|---------|------|
 | **websketch-ir** | Core IR grammar and serialization (this repo) |
 | [websketch-cli](https://github.com/mcp-tool-shop-org/websketch-cli) | Command-line tool for rendering, fingerprinting, and diffing |
 | [websketch-extension](https://github.com/mcp-tool-shop-org/websketch-extension) | Chrome extension for capturing pages |
 | [websketch-mcp](https://github.com/mcp-tool-shop-org/websketch-mcp) | MCP server for LLM agent integration |
 | [websketch-demo](https://github.com/mcp-tool-shop-org/websketch-demo) | Interactive demo and visualization |
-
-## Getting Started
-
-WebSketch captures web UI as a compact grammar for LLMs. The typical workflow:
-
-1. **Capture** -- Use the [Chrome extension](https://github.com/mcp-tool-shop-org/websketch-extension) to capture a page
-2. **Validate** -- `websketch validate capture.json` (CLI) or `websketch_validate` (MCP)
-3. **Visualize** -- Paste into the [demo](https://mcptoolshop.com) or `websketch render capture.json`
-4. **Diff** -- `websketch diff before.json after.json` to compare captures
-5. **Bundle** -- `websketch bundle a.json b.json -o bundle.ws.json` to share
-
-**JSON envelope** (CLI `--json` and MCP tools):
-```json
-{ "ok": true, ... }
-{ "ok": false, "error": { "code": "WS_...", "message": "..." } }
-```
 
 ## Installation
 
@@ -54,6 +38,8 @@ npm install @mcptoolshop/websketch-ir
 ```
 
 ## Usage
+
+### Parse and validate a capture
 
 ```typescript
 import {
@@ -82,6 +68,66 @@ const result = diff(captureA, captureB);
 isSupportedSchemaVersion("0.1"); // true
 ```
 
+### Rendering modes
+
+```typescript
+import { renderAscii, renderForLLM, renderStructure } from '@mcptoolshop/websketch-ir';
+
+// Full ASCII wireframe (80x24 grid, box-drawing borders)
+const wireframe = renderAscii(capture);
+
+// LLM-optimized view (URL + viewport header, legend footer)
+const llmView = renderForLLM(capture);
+
+// Minimal structure-only view (no semantics, no text, ASCII borders)
+const structure = renderStructure(capture, 60, 16);
+```
+
+### Diffing two captures
+
+```typescript
+import { diff, formatDiff } from '@mcptoolshop/websketch-ir';
+
+const result = diff(captureA, captureB, {
+  matchThreshold: 0.5,   // minimum similarity to consider a match
+  moveThreshold: 0.01,   // bbox movement below this is noise
+  resizeThreshold: 0.01, // bbox resize below this is noise
+});
+
+// Human-readable report
+console.log(formatDiff(result));
+
+// result.summary.counts: { added, removed, moved, resized, text_changed, ... }
+// result.topChanges: top N changes ranked by visual area
+```
+
+### Fingerprinting
+
+```typescript
+import { fingerprintCapture, fingerprintLayout } from '@mcptoolshop/websketch-ir';
+
+// Full structural fingerprint (roles + geometry + text + viewport aspect)
+const fp = fingerprintCapture(capture);
+
+// Layout-only fingerprint (ignores text content changes)
+const layoutFp = fingerprintLayout(capture);
+
+// Quick equality check
+if (fingerprintCapture(a) === fingerprintCapture(b)) {
+  console.log('Pages are structurally identical');
+}
+```
+
+### Import sub-paths
+
+```typescript
+// Grammar types only (no runtime code)
+import type { UINode, UIRole, BBox01, WebSketchCapture } from '@mcptoolshop/websketch-ir/grammar';
+
+// Error types and utilities
+import { WebSketchException, formatWebSketchError } from '@mcptoolshop/websketch-ir/errors';
+```
+
 ## Schema Versioning
 
 WebSketch IR uses semantic versioning for the capture schema:
@@ -106,10 +152,15 @@ WebSketch IR uses semantic versioning for the capture schema:
 | `WS_PERMISSION_DENIED` | Insufficient permissions |
 | `WS_INTERNAL` | Unexpected internal error |
 
+## Docs
+
+| Document | Description |
+|----------|-------------|
+| [HANDBOOK.md](HANDBOOK.md) | Deep-dive guide: grammar model, API reference, diffing, fingerprinting, integration patterns |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Code of conduct |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
+
 ## License
 
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+MIT License -- see [LICENSE](LICENSE) for details.

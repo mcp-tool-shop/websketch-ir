@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-02-18
+
+### Added
+- HANDBOOK.md — deep-dive guide covering grammar model, API reference, diffing, fingerprinting, error handling, and integration
+
+### Changed
+- README.md — rewritten with "At a Glance" section, ecosystem table, docs table, standardized badge row
+
 ## 0.3.1
 
 - **feat**: Schema version compatibility helpers (`isSupportedSchemaVersion`, `CURRENT_SCHEMA_VERSION`, `SUPPORTED_SCHEMA_VERSIONS`)
