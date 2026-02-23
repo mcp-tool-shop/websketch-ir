@@ -6,6 +6,7 @@
 
 **A grammar-based intermediate representation for capturing web page UI structure as semantic primitives.**
 
+[![CI](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml/badge.svg)](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/@mcptoolshop/websketch-ir.svg)](https://www.npmjs.com/package/@mcptoolshop/websketch-ir)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![node 18+](https://img.shields.io/badge/node-18%2B-brightgreen.svg)](https://nodejs.org)
