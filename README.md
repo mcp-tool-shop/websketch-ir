@@ -1,22 +1,20 @@
-<p align="center"><img src="logo.png" alt="websketch-ir logo" width="200"></p>
+<p align="center"><img src="logo.png" alt="WebSketch" width="340"></p>
 
-# websketch-ir
+<p align="center"><strong>Grammar-based intermediate representation for capturing web page UI structure as semantic primitives.</strong></p>
 
-> Part of [MCP Tool Shop](https://mcptoolshop.com)
-
-**A grammar-based intermediate representation for capturing web page UI structure as semantic primitives.**
-
-[![CI](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml/badge.svg)](https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/@mcptoolshop/websketch-ir.svg)](https://www.npmjs.com/package/@mcptoolshop/websketch-ir)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![node 18+](https://img.shields.io/badge/node-18%2B-brightgreen.svg)](https://nodejs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org)
+<p align="center">
+  <a href="https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml"><img src="https://github.com/mcp-tool-shop-org/websketch-ir/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://www.npmjs.com/package/@mcptoolshop/websketch-ir"><img src="https://img.shields.io/npm/v/@mcptoolshop/websketch-ir.svg" alt="npm version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+  <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-18%2B-brightgreen.svg" alt="node 18+"></a>
+  <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.3-blue.svg" alt="TypeScript"></a>
+</p>
 
 ---
 
 ## At a Glance
 
-- **Grammar-based** -- Compiles DOM soup into a small, fixed vocabulary of UI primitives (`BUTTON`, `NAV`, `CARD`, `INPUT`, ...)
+- **Grammar-based** -- Compiles DOM soup into a small, fixed vocabulary of 23 UI primitives (`BUTTON`, `NAV`, `CARD`, `INPUT`, ...)
 - **LLM-friendly** -- ASCII wireframe rendering lets language models reason about layouts without vision
 - **Typed** -- Full TypeScript types for every node, capture, and option; zero runtime dependencies
 - **Diffable** -- Structural diff engine matches nodes by geometry + role + semantics, not DOM identity
@@ -27,6 +25,7 @@
 | Package | Role |
 |---------|------|
 | **websketch-ir** | Core IR grammar and serialization (this repo) |
+| [websketch-vscode](https://github.com/mcp-tool-shop-org/websketch-vscode) | VS Code extension -- capture pages from your editor |
 | [websketch-cli](https://github.com/mcp-tool-shop-org/websketch-cli) | Command-line tool for rendering, fingerprinting, and diffing |
 | [websketch-extension](https://github.com/mcp-tool-shop-org/websketch-extension) | Chrome extension for capturing pages |
 | [websketch-mcp](https://github.com/mcp-tool-shop-org/websketch-mcp) | MCP server for LLM agent integration |
@@ -165,3 +164,5 @@ WebSketch IR uses semantic versioning for the capture schema:
 ## License
 
 MIT License -- see [LICENSE](LICENSE) for details.
+
+> Part of [MCP Tool Shop](https://mcptoolshop.com)
