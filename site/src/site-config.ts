@@ -10,7 +10,7 @@ export const config: SiteConfig = {
   footerText: 'MIT Licensed — built by <a href="https://github.com/mcp-tool-shop-org" style="color:var(--color-muted);text-decoration:underline">mcp-tool-shop-org</a>',
 
   hero: {
-    badge: 'v0.4.1 · 23 UI primitives · zero runtime deps',
+    badge: 'v0.5.0 · 23 UI primitives · zero runtime deps',
     headline: 'WebSketch IR',
     headlineAccent: 'stop treating webpages like pictures.',
     description: 'A grammar-based intermediate representation that compiles DOM soup into a small, fixed vocabulary of semantic UI primitives. LLMs reason about layouts without vision.',

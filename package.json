@@ -1,6 +1,6 @@
 {
   "name": "@mcptoolshop/websketch-ir",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Grammar-based representation of web UI for LLM consumption",
   "type": "module",
   "main": "./dist/index.js",
