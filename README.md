@@ -1,6 +1,4 @@
-<p align="center">
-            <img src="https://raw.githubusercontent.com/mcp-tool-shop-org/brand/main/logos/websketch-ir/readme.png"
-           alt="WebSketch" width="340"></p>
+<p align="center"><img src="logo.png" alt="WebSketch" width="340"></p>
 
 <p align="center"><strong>Grammar-based intermediate representation for capturing web page UI structure as semantic primitives.</strong></p>
 
