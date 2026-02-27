@@ -162,6 +162,31 @@ WebSketch IR uses semantic versioning for the capture schema:
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Code of conduct |
 | [CHANGELOG.md](CHANGELOG.md) | Release history |
 
+## Security & Data Scope
+
+| Aspect | Detail |
+|--------|--------|
+| **Data touched** | WebSketch IR JSON captures (in-memory parsing, validation, rendering, diffing, fingerprinting) |
+| **Data NOT touched** | No telemetry, no analytics, no network calls, no filesystem access, no credential storage |
+| **Permissions** | Pure library — no filesystem, no network, no side effects |
+| **Network** | None — fully offline library |
+| **Telemetry** | None collected or sent |
+
+See [SECURITY.md](SECURITY.md) for vulnerability reporting.
+
+## Scorecard
+
+| Category | Score |
+|----------|-------|
+| A. Security | 10 |
+| B. Error Handling | 10 |
+| C. Operator Docs | 10 |
+| D. Shipping Hygiene | 10 |
+| E. Identity (soft) | 10 |
+| **Overall** | **50/50** |
+
+> Full audit: [SHIP_GATE.md](SHIP_GATE.md) · [SCORECARD.md](SCORECARD.md)
+
 ## License
 
 MIT License -- see [LICENSE](LICENSE) for details.
